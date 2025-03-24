@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  language-teacher-api:
+    build:
+      context: Backend/LanguageTeacher
+      dockerfile: LanguageTeacher/LanguageTeacher.API/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MySqlDatabaseConnectionLanguageTeacher=${ConnectionStrings__MySqlDatabaseConnectionLanguageTeacher}
+    ports:
+      - "5000:80"
+      - "5001:443"
+    networks:
+      - lang-teach-network
+
+  user-management-api:
+    build:
+      context: Backend/LanguageTeacher
+      dockerfile: UserManagement/UserManagement.API/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MySqlDatabaseConnectionUserManagement=${ConnectionStrings__MySqlDatabaseConnectionUserManagement}
+    ports:
+      - "5002:80"
+      - "5003:443"
+    networks:
+      - lang-teach-network
+
+networks:
+  lang-teach-network:
+    driver: bridge
