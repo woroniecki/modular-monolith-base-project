@@ -5,8 +5,6 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { BASE_PATH } from './api-client';
-import { environment } from '../environments/environment';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
@@ -15,9 +13,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    {
-      provide: BASE_PATH,
-      useValue: environment.apiBaseUrl,
-    },
   ],
 };

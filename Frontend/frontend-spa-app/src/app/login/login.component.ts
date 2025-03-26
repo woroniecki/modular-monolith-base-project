@@ -3,8 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AccountService } from '../api-client';
 import { FormsModule } from '@angular/forms';
+import { AccountService } from '../api-client/services';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,9 @@ export class LoginComponent {
 
   onSubmit() {
     this.apiAccountService
-      .apiAccountLoginPost({ username: this.username, password: this.password })
+      .apiAccountLoginPost({
+        body: { username: this.username, password: this.password },
+      })
       .subscribe(() => console.log('User logged in:', this.username));
   }
 }
