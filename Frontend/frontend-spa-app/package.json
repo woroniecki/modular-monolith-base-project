@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend-spa-app": "node dist/frontend-spa-app/server/server.mjs",
-    "generate:client": "openapi-generator-cli generate -i src/assets/swagger/swagger.json -g typescript-angular -o src/app/api-client",
+    "generate:client": "ng-openapi-gen --config src/assets/swagger/swagger-config.json",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,css}\""
   },
@@ -53,6 +53,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-openapi-gen": "^0.52.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.0.15",
