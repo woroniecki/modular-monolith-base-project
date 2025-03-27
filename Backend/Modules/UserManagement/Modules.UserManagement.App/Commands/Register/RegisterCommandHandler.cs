@@ -1,9 +1,9 @@
 ﻿using MediatR;
+using Modules.UserManagement.App.Services.Password;
 using Modules.UserManagement.Domain.Aggregates.Account;
 using Modules.UserManagement.Infrastructure.DataAccessLayer.UoT;
 using Modules.UserManagement.IntegrationEvents.Events;
 using SharedUtils.Events;
-using UserAuth.App.Services.Password;
 
 namespace Modules.UserManagement.App.Commands.Register;
 public sealed class RegisterCommandHandler(

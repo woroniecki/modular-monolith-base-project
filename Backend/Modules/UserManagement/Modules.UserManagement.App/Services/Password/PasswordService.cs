@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
-namespace UserAuth.App.Services.Password;
+namespace Modules.UserManagement.App.Services.Password;
 public class PasswordService : IPasswordService
 {
     private readonly IConfiguration _configuration;

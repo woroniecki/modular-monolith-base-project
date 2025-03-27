@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using UserAuth.App.Services.Password;
 
 namespace SharedUtils.Auth;
 public static class Extensions
 {
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        AddServices(services);
         AddJwtAuthentication(services, configuration);
 
         return services;
@@ -38,10 +36,5 @@ public static class Extensions
             };
         });
         services.AddAuthorization();
-    }
-
-    private static void AddServices(IServiceCollection services)
-    {
-        services.AddScoped<IPasswordService, PasswordService>();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Modules.UserManagement.App.Services.RefreshTokenService;
+namespace Modules.UserManagement.App.Services.RefreshToken;
 public class RefreshTokenService : IRefreshTokenService
 {
     public string HashToken(string token)

@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Modules.UserManagement.App.Services.RefreshTokenService;
+using Modules.UserManagement.App.Services.Password;
+using Modules.UserManagement.App.Services.RefreshToken;
 using Modules.UserManagement.Infrastructure.DataAccessLayer.UoT;
 using SharedUtils.Jwt;
 using SharedUtils.Time;
-using UserAuth.App.Services.Password;
 
 namespace Modules.UserManagement.App.Commands.Login;
 public sealed class LoginCommandHandler(

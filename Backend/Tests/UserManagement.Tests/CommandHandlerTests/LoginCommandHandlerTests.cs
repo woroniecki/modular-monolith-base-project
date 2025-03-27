@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Modules.UserManagement.App.Commands.Login;
+using Modules.UserManagement.App.Services.Password;
 using Modules.UserManagement.Domain.Aggregates;
 using Modules.UserManagement.Infrastructure.DataAccessLayer.Repositories;
 using Moq;
 using SharedUtils.Jwt;
-using UserAuth.App.Services.Password;
 
 namespace UserManagement.Tests.CommandHandlerTests;
 
