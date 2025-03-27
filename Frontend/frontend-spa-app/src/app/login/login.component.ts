@@ -1,35 +1,38 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
 import { AccountService } from '../api-client/services';
+import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.component';
+import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  styleUrl: './login.component.css',
-  imports: [
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    FormsModule,
-  ],
+  imports: [DynamicFormComponent],
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
+  loginFormConfig = [
+    { label: 'Username', name: 'username', type: 'text', required: true },
+    { label: 'Password', name: 'password', type: 'password', required: true },
+  ];
 
-  constructor(private apiAccountService: AccountService) {}
+  constructor(
+    private apiAccountService: AccountService,
+    private dialog: MatDialog,
+  ) {}
 
-  onSubmit() {
+  onSubmit(formData: { username: string; password: string }) {
+    console.log('FormData type:', typeof formData);
     this.apiAccountService
-      .apiAccountLoginPost({
-        body: { username: this.username, password: this.password },
-      })
-      .subscribe(() => console.log('User logged in:', this.username));
+      .apiUsermanagementAccountLoginPost({ body: formData })
+      .subscribe({
+        next: () => console.log('User logged in:', formData.username),
+        error: () => {
+          this.dialog.open(ErrorModalComponent, {
+            data: { message: 'Login failed. Please check your credentials.' },
+            width: '400px',
+          });
+        },
+      });
   }
 }

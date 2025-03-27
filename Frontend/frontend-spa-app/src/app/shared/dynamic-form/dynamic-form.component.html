@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <ng-container *ngFor="let field of formConfig">
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>{{ field.label }}</mat-label>
+        <input
+          matInput
+          [type]="field.type"
+          [formControlName]="field.name"
+          [required]="field.required"
+        />
+        <mat-error *ngIf="form.get(field.name)?.hasError('required')">
+          {{ field.label }} is required
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+    <button mat-raised-button color="primary" type="submit" class="w-full">
+      {{ submitButtonLabel }}
+    </button>
+  </form>

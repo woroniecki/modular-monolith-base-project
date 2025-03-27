@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   standalone: true,
-  styleUrl: './register.component.css',
-  imports: [MatInputModule, MatFormFieldModule, MatToolbarModule, MatButtonModule],
+  imports: [DynamicFormComponent],
 })
 export class RegisterComponent {
-  username: string = '';
-  password: string = '';
-  email: string = '';
+  registerFormConfig = [
+    { label: 'Username', name: 'username', type: 'text', required: true },
+    { label: 'Email', name: 'email', type: 'email', required: true },
+    { label: 'Password', name: 'password', type: 'password', required: true },
+  ];
 
-  register() {
-    // Registration logic goes here
-    console.log('User registered:', this.username, this.email);
+  onSubmit(formData: object) {
+    console.log('User registered:', formData);
+    // Add registration logic here
   }
 }
