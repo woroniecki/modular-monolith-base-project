@@ -7,7 +7,7 @@ using Modules.UserManagement.App.Commands.Register;
 
 namespace Modules.UserManagement.API.Controllers;
 
-[Route("api/[controller]")]
+[Route($"api/{ApiName.Name}/[controller]")]
 [ApiController]
 public class AccountController(IMediator mediator, ILogger<AccountController> logger)
     : ControllerBase

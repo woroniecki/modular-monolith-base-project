@@ -5,8 +5,8 @@ using Modules.Core.App.Queries.HealthCheck;
 
 namespace Modules.Core.API.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route($"api/{ApiName.Name}/[controller]")]
 public class HealthCheckController(IMediator mediator)
     : ControllerBase
 {

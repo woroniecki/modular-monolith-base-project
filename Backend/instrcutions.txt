@@ -14,6 +14,7 @@ Adding new module:
 builder.Services.AddCoreModule();
 10. Add create database w init-db.sql
 11. Add UnitTests project
+12. Repkace ApiName, to segragate endpoints
 
 Adding new integration event:
 1. Create class in project Module.ModuleName.IntegrationEvent
