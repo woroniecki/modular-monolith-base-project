@@ -85,6 +85,18 @@
           }
         }
       }
+    },
+    "/api/usermanagement/Account/refresh-login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

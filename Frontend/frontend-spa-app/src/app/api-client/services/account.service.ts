@@ -13,6 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { apiUsermanagementAccountLoginPost } from '../fn/account/api-usermanagement-account-login-post';
 import { ApiUsermanagementAccountLoginPost$Params } from '../fn/account/api-usermanagement-account-login-post';
+import { apiUsermanagementAccountRefreshLoginPost } from '../fn/account/api-usermanagement-account-refresh-login-post';
+import { ApiUsermanagementAccountRefreshLoginPost$Params } from '../fn/account/api-usermanagement-account-refresh-login-post';
 import { apiUsermanagementAccountRegisterPost } from '../fn/account/api-usermanagement-account-register-post';
 import { ApiUsermanagementAccountRegisterPost$Params } from '../fn/account/api-usermanagement-account-register-post';
 
@@ -68,6 +70,31 @@ export class AccountService extends BaseService {
    */
   apiUsermanagementAccountLoginPost(params: ApiUsermanagementAccountLoginPost$Params, context?: HttpContext): Observable<void> {
     return this.apiUsermanagementAccountLoginPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUsermanagementAccountRefreshLoginPost()` */
+  static readonly ApiUsermanagementAccountRefreshLoginPostPath = '/api/usermanagement/Account/refresh-login';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountRefreshLoginPost()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountRefreshLoginPost$Response(params?: ApiUsermanagementAccountRefreshLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiUsermanagementAccountRefreshLoginPost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountRefreshLoginPost$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountRefreshLoginPost(params?: ApiUsermanagementAccountRefreshLoginPost$Params, context?: HttpContext): Observable<void> {
+    return this.apiUsermanagementAccountRefreshLoginPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

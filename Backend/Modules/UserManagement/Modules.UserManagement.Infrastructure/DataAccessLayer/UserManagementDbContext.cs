@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Modules.UserManagement.Domain.Aggregates;
+using Modules.UserManagement.Domain.Aggregates.Account;
 using SharedUtils.Database;
 
 //Run from bootstrapper project folder

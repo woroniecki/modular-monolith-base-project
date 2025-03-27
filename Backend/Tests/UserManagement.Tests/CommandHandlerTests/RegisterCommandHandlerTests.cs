@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Modules.UserManagement.App.Commands.Register;
-using Modules.UserManagement.Domain.Aggregates;
+using Modules.UserManagement.Domain.Aggregates.Account;
 using Modules.UserManagement.Infrastructure.DataAccessLayer.Repositories;
 using Modules.UserManagement.IntegrationEvents.Events;
 using Moq;

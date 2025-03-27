@@ -5,5 +5,7 @@
     "serviceSuffix": "Service",
     "module": "ApiModule",
     "enumStyle": "alias",
-    "barrel": true
+    "barrel": true,
+    "useHttpClientWithCredentials": true,
+    "withCredentials": true
 }
