@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.component';
+import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AccountService } from '../api-client/services';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +17,31 @@ export class RegisterComponent {
     { label: 'Password', name: 'password', type: 'password', required: true },
   ];
 
-  onSubmit(formData: object) {
-    console.log('User registered:', formData);
-    // Add registration logic here
+  constructor(
+    private apiAccountService: AccountService,
+    private dialog: MatDialog,
+  ) {}
+
+  onSubmit(formData: { username: string; email: string; password: string }) {
+    this.apiAccountService
+      .apiUsermanagementAccountRegisterPost({
+        body: {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+      })
+      .subscribe({
+        next: () => console.log('User logged in:', formData.username),
+        error: (err) => {
+          console.log(err);
+          this.dialog.open(ErrorModalComponent, {
+            data: {
+              message: `Register failed.\n${err.message}`,
+            },
+            width: '400px',
+          });
+        },
+      });
   }
 }

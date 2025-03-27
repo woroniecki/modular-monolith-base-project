@@ -27,9 +27,11 @@ export class LoginComponent {
       .apiUsermanagementAccountLoginPost({ body: formData })
       .subscribe({
         next: () => console.log('User logged in:', formData.username),
-        error: () => {
+        error: (err) => {
           this.dialog.open(ErrorModalComponent, {
-            data: { message: 'Login failed. Please check your credentials.' },
+            data: {
+              message: `Login failed. Please check your credentials.\n${err.message}`,
+            },
             width: '400px',
           });
         },
