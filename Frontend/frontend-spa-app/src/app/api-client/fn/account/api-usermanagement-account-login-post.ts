@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { RegisterCommand } from '../../models/register-command';
+import { LoginCommand } from '../../models/login-command';
 
-export interface ApiAccountRegisterPost$Params {
-      body: RegisterCommand
+export interface ApiUsermanagementAccountLoginPost$Params {
+      body: LoginCommand
 }
 
-export function apiAccountRegisterPost(http: HttpClient, rootUrl: string, params: ApiAccountRegisterPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, apiAccountRegisterPost.PATH, 'post');
+export function apiUsermanagementAccountLoginPost(http: HttpClient, rootUrl: string, params: ApiUsermanagementAccountLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, apiUsermanagementAccountLoginPost.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/*+json');
   }
@@ -30,4 +30,4 @@ export function apiAccountRegisterPost(http: HttpClient, rootUrl: string, params
   );
 }
 
-apiAccountRegisterPost.PATH = '/api/Account/register';
+apiUsermanagementAccountLoginPost.PATH = '/api/usermanagement/Account/login';

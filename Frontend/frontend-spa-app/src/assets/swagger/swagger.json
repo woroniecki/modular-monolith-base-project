@@ -1,136 +1,136 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "Bootstrapper | v1",
-      "version": "1.0.0"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:5244"
-      }
-    ],
-    "paths": {
-      "/api/HealthCheck/health-check": {
-        "get": {
-          "tags": [
-            "HealthCheck"
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-      },
-      "/api/Account/register": {
-        "post": {
-          "tags": [
-            "Account"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegisterCommand"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegisterCommand"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegisterCommand"
-                }
-              }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-      },
-      "/api/Account/login": {
-        "post": {
-          "tags": [
-            "Account"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginCommand"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginCommand"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginCommand"
-                }
-              }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bootstrapper | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5244"
+    }
+  ],
+  "paths": {
+    "/api/core/HealthCheck/health-check": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "LoginCommand": {
-          "required": [
-            "username",
-            "password"
-          ],
-          "type": "object",
-          "properties": {
-            "username": {
-              "type": "string"
+    "/api/usermanagement/Account/register": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCommand"
+              }
             },
-            "password": {
-              "type": "string"
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterCommand"
+              }
             }
-          }
+          },
+          "required": true
         },
-        "RegisterCommand": {
-          "required": [
-            "username",
-            "email",
-            "password"
-          ],
-          "type": "object",
-          "properties": {
-            "username": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            }
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "tags": [
-      {
-        "name": "HealthCheck"
-      },
-      {
-        "name": "Account"
+    "/api/usermanagement/Account/login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
-    ]
-  }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginCommand": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterCommand": {
+        "required": [
+          "username",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "HealthCheck"
+    },
+    {
+      "name": "Account"
+    }
+  ]
+}

@@ -11,8 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { apiHealthCheckHealthCheckGet } from '../fn/health-check/api-health-check-health-check-get';
-import { ApiHealthCheckHealthCheckGet$Params } from '../fn/health-check/api-health-check-health-check-get';
+import { apiCoreHealthCheckHealthCheckGet } from '../fn/health-check/api-core-health-check-health-check-get';
+import { ApiCoreHealthCheckHealthCheckGet$Params } from '../fn/health-check/api-core-health-check-health-check-get';
 
 @Injectable({ providedIn: 'root' })
 export class HealthCheckService extends BaseService {
@@ -20,27 +20,27 @@ export class HealthCheckService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `apiHealthCheckHealthCheckGet()` */
-  static readonly ApiHealthCheckHealthCheckGetPath = '/api/HealthCheck/health-check';
+  /** Path part for operation `apiCoreHealthCheckHealthCheckGet()` */
+  static readonly ApiCoreHealthCheckHealthCheckGetPath = '/api/core/HealthCheck/health-check';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiHealthCheckHealthCheckGet()` instead.
+   * To access only the response body, use `apiCoreHealthCheckHealthCheckGet()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiHealthCheckHealthCheckGet$Response(params?: ApiHealthCheckHealthCheckGet$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiHealthCheckHealthCheckGet(this.http, this.rootUrl, params, context);
+  apiCoreHealthCheckHealthCheckGet$Response(params?: ApiCoreHealthCheckHealthCheckGet$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiCoreHealthCheckHealthCheckGet(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiHealthCheckHealthCheckGet$Response()` instead.
+   * To access the full response (for headers, for example), `apiCoreHealthCheckHealthCheckGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiHealthCheckHealthCheckGet(params?: ApiHealthCheckHealthCheckGet$Params, context?: HttpContext): Observable<void> {
-    return this.apiHealthCheckHealthCheckGet$Response(params, context).pipe(
+  apiCoreHealthCheckHealthCheckGet(params?: ApiCoreHealthCheckHealthCheckGet$Params, context?: HttpContext): Observable<void> {
+    return this.apiCoreHealthCheckHealthCheckGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

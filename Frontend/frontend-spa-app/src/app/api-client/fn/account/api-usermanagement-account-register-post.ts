@@ -8,13 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { RegisterCommand } from '../../models/register-command';
 
-export interface ApiHealthCheckHealthCheckGet$Params {
+export interface ApiUsermanagementAccountRegisterPost$Params {
+      body: RegisterCommand
 }
 
-export function apiHealthCheckHealthCheckGet(http: HttpClient, rootUrl: string, params?: ApiHealthCheckHealthCheckGet$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, apiHealthCheckHealthCheckGet.PATH, 'get');
+export function apiUsermanagementAccountRegisterPost(http: HttpClient, rootUrl: string, params: ApiUsermanagementAccountRegisterPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, apiUsermanagementAccountRegisterPost.PATH, 'post');
   if (params) {
+    rb.body(params.body, 'application/*+json');
   }
 
   return http.request(
@@ -27,4 +30,4 @@ export function apiHealthCheckHealthCheckGet(http: HttpClient, rootUrl: string, 
   );
 }
 
-apiHealthCheckHealthCheckGet.PATH = '/api/HealthCheck/health-check';
+apiUsermanagementAccountRegisterPost.PATH = '/api/usermanagement/Account/register';
