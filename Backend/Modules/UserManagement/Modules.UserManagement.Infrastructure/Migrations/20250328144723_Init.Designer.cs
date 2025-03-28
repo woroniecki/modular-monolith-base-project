@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.UserManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(UserManagementDbContext))]
-    [Migration("20250327151949_AddRefreshToken")]
-    partial class AddRefreshToken
+    [Migration("20250328144723_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Modules.UserManagement.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("user_management_db")
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -91,7 +91,7 @@ namespace Modules.UserManagement.Infrastructure.Migrations
                     b.HasIndex("HashedToken")
                         .IsUnique();
 
-                    b.ToTable("RefreshToken", "user_management_db");
+                    b.ToTable("RefreshTokens", "user_management_db");
                 });
 
             modelBuilder.Entity("Modules.UserManagement.Domain.Aggregates.Account.Entities.RefreshToken", b =>
