@@ -5,6 +5,11 @@ using SharedUtils.Events;
 
 namespace SharedUtils.Cqrs.PipelineBehaviors;
 
+/// <summary>
+/// It is executed only for commands and it wraps the execution in a transaction.
+/// </summary>
+/// <typeparam name="TRequest"></typeparam>
+/// <typeparam name="TResponse"></typeparam>
 public class TransactionAndEventsBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
@@ -24,6 +29,11 @@ public class TransactionAndEventsBehavior<TRequest, TResponse> : IPipelineBehavi
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
+        if (!typeof(TRequest).Name.EndsWith("Command"))
+        {
+            return await next();
+        }
+
         var requestModuleName = GetModuleName(typeof(TRequest).Assembly.GetName().Name);
 
         var dbContext = _dbContexts
