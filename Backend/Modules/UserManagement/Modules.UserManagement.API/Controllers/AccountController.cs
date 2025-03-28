@@ -14,6 +14,8 @@ namespace Modules.UserManagement.API.Controllers;
 public class AccountController(IMediator mediator, ILogger<AccountController> logger)
     : ControllerBase
 {
+    private const string REFRESH_TOKEN_KEY = "refresh_token";
+
     [HttpPost]
     [Route("register")]
     [AllowAnonymous]
@@ -24,15 +26,15 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
 
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login([FromBody] LoginCommand cmd)
+    public async Task<ActionResult<string>> Login([FromBody] LoginCommand cmd)
     {
         var response = await mediator.Send(cmd);
 
-        if (!Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
+        if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
             logger.LogInformation(refreshToken);
 
         // Store the new refresh token in an HTTP-Only Secure Cookie
-        Response.Cookies.Append("refreshToken", response.RefreshToken, new CookieOptions
+        Response.Cookies.Append(REFRESH_TOKEN_KEY, response.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
             Secure = false,
@@ -40,28 +42,28 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
             Expires = DateTime.UtcNow.AddDays(7)
         });
 
-        return Ok(response);
+        return Ok(response.AccessToken);
     }
 
     [HttpPost]
     [Route("refresh-login")]
-    public async Task<IActionResult> RefreshLogin()
+    public async Task<ActionResult<string>> RefreshLogin()
     {
-        if (!Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
+        if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
             return Unauthorized("Missing token");
 
-        var command = new RefreshLoginCommand(refreshToken);
+       var command = new RefreshLoginCommand(refreshToken);
         var response = await mediator.Send(command);
 
         // Store the new refresh token in an HTTP-Only Secure Cookie
-        Response.Cookies.Append("refreshToken", response.NewRefreshToken, new CookieOptions
+        Response.Cookies.Append(REFRESH_TOKEN_KEY, response.NewRefreshToken, new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,
+            Secure = false,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         });
 
-        return Ok(response);
+        return Ok(response.AccessToken);
     }
 }

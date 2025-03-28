@@ -10,24 +10,24 @@ import { RequestBuilder } from '../../request-builder';
 
 import { LoginCommand } from '../../models/login-command';
 
-export interface ApiUsermanagementAccountLoginPost$Params {
+export interface ApiUsermanagementAccountLoginPost$Json$Params {
       body: LoginCommand
 }
 
-export function apiUsermanagementAccountLoginPost(http: HttpClient, rootUrl: string, params: ApiUsermanagementAccountLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, apiUsermanagementAccountLoginPost.PATH, 'post');
+export function apiUsermanagementAccountLoginPost$Json(http: HttpClient, rootUrl: string, params: ApiUsermanagementAccountLoginPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  const rb = new RequestBuilder(rootUrl, apiUsermanagementAccountLoginPost$Json.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/*+json');
   }
 
   return http.request(
-    rb.build({ responseType: 'text', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: 'text/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      return r as StrictHttpResponse<string>;
     })
   );
 }
 
-apiUsermanagementAccountLoginPost.PATH = '/api/usermanagement/Account/login';
+apiUsermanagementAccountLoginPost$Json.PATH = '/api/usermanagement/Account/login';

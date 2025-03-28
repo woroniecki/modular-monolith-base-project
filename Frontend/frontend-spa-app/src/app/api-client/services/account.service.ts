@@ -11,10 +11,14 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { apiUsermanagementAccountLoginPost } from '../fn/account/api-usermanagement-account-login-post';
-import { ApiUsermanagementAccountLoginPost$Params } from '../fn/account/api-usermanagement-account-login-post';
-import { apiUsermanagementAccountRefreshLoginPost } from '../fn/account/api-usermanagement-account-refresh-login-post';
-import { ApiUsermanagementAccountRefreshLoginPost$Params } from '../fn/account/api-usermanagement-account-refresh-login-post';
+import { apiUsermanagementAccountLoginPost$Json } from '../fn/account/api-usermanagement-account-login-post-json';
+import { ApiUsermanagementAccountLoginPost$Json$Params } from '../fn/account/api-usermanagement-account-login-post-json';
+import { apiUsermanagementAccountLoginPost$Plain } from '../fn/account/api-usermanagement-account-login-post-plain';
+import { ApiUsermanagementAccountLoginPost$Plain$Params } from '../fn/account/api-usermanagement-account-login-post-plain';
+import { apiUsermanagementAccountRefreshLoginPost$Json } from '../fn/account/api-usermanagement-account-refresh-login-post-json';
+import { ApiUsermanagementAccountRefreshLoginPost$Json$Params } from '../fn/account/api-usermanagement-account-refresh-login-post-json';
+import { apiUsermanagementAccountRefreshLoginPost$Plain } from '../fn/account/api-usermanagement-account-refresh-login-post-plain';
+import { ApiUsermanagementAccountRefreshLoginPost$Plain$Params } from '../fn/account/api-usermanagement-account-refresh-login-post-plain';
 import { apiUsermanagementAccountRegisterPost } from '../fn/account/api-usermanagement-account-register-post';
 import { ApiUsermanagementAccountRegisterPost$Params } from '../fn/account/api-usermanagement-account-register-post';
 
@@ -54,23 +58,45 @@ export class AccountService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiUsermanagementAccountLoginPost()` instead.
+   * To access only the response body, use `apiUsermanagementAccountLoginPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUsermanagementAccountLoginPost$Response(params: ApiUsermanagementAccountLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiUsermanagementAccountLoginPost(this.http, this.rootUrl, params, context);
+  apiUsermanagementAccountLoginPost$Plain$Response(params: ApiUsermanagementAccountLoginPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountLoginPost$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiUsermanagementAccountLoginPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountLoginPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiUsermanagementAccountLoginPost(params: ApiUsermanagementAccountLoginPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiUsermanagementAccountLoginPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiUsermanagementAccountLoginPost$Plain(params: ApiUsermanagementAccountLoginPost$Plain$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountLoginPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountLoginPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountLoginPost$Json$Response(params: ApiUsermanagementAccountLoginPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountLoginPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountLoginPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountLoginPost$Json(params: ApiUsermanagementAccountLoginPost$Json$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountLoginPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
     );
   }
 
@@ -79,23 +105,45 @@ export class AccountService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiUsermanagementAccountRefreshLoginPost()` instead.
+   * To access only the response body, use `apiUsermanagementAccountRefreshLoginPost$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiUsermanagementAccountRefreshLoginPost$Response(params?: ApiUsermanagementAccountRefreshLoginPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiUsermanagementAccountRefreshLoginPost(this.http, this.rootUrl, params, context);
+  apiUsermanagementAccountRefreshLoginPost$Plain$Response(params?: ApiUsermanagementAccountRefreshLoginPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountRefreshLoginPost$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiUsermanagementAccountRefreshLoginPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountRefreshLoginPost$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  apiUsermanagementAccountRefreshLoginPost(params?: ApiUsermanagementAccountRefreshLoginPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiUsermanagementAccountRefreshLoginPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiUsermanagementAccountRefreshLoginPost$Plain(params?: ApiUsermanagementAccountRefreshLoginPost$Plain$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountRefreshLoginPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountRefreshLoginPost$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountRefreshLoginPost$Json$Response(params?: ApiUsermanagementAccountRefreshLoginPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountRefreshLoginPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountRefreshLoginPost$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountRefreshLoginPost$Json(params?: ApiUsermanagementAccountRefreshLoginPost$Json$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountRefreshLoginPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
     );
   }
 

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Modules.UserManagement.App.Services.Password;
 using Modules.UserManagement.App.Services.RefreshToken;
 using Modules.UserManagement.Infrastructure.DataAccessLayer.UoT;
@@ -18,7 +19,8 @@ public sealed class LoginCommandHandler(
     {
         var hashedPassword = _passwordService.HashPassword(request.Password);
 
-        var account = await _uot.Accounts.GetByUsernameAsync(request.Username);
+        var account = await _uot.DbContext.Accounts.Include(a => a.RefreshTokens).AsTracking()
+            .FirstOrDefaultAsync(a => a.Username == request.Username);
 
         if (account != null && hashedPassword == account.Password)
         {
@@ -30,15 +32,13 @@ public sealed class LoginCommandHandler(
                 "device-info",
                 "ip-address");
 
-            await _uot.Accounts.UpdateAsync(account);
+            await _uot.SaveAsync();
 
             return new LoginCommandResponse(
-                _jwtService.GenerateJwtToken(account.Id, account.Username, account.Email),
-                newRefreshToken
-                );
+                    _jwtService.GenerateJwtToken(account.Id, account.Username, account.Email),
+                    newRefreshToken
+                    );
         }
-
-        await _uot.SaveAsync();
 
         throw new Exception("Invalid username or password");
     }

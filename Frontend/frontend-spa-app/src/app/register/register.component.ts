@@ -3,6 +3,7 @@ import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.compon
 import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountService } from '../api-client/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent {
   constructor(
     private apiAccountService: AccountService,
     private dialog: MatDialog,
+    private router: Router,
   ) {}
 
   onSubmit(formData: { username: string; email: string; password: string }) {
@@ -32,7 +34,9 @@ export class RegisterComponent {
         },
       })
       .subscribe({
-        next: () => console.log('User logged in:', formData.username),
+        next: () => {
+          this.router.navigate(['/login']);
+        },
         error: (err) => {
           console.log(err);
           this.dialog.open(ErrorModalComponent, {

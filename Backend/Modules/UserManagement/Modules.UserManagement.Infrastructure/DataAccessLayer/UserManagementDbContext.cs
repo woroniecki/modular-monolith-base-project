@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.UserManagement.Domain.Aggregates.Account;
+using Modules.UserManagement.Domain.Aggregates.Account.Entities;
 using SharedUtils.Database;
 
 //Run from bootstrapper project folder
@@ -13,6 +14,8 @@ public sealed class UserManagementDbContext : BaseDbContext
     : base(options) { }
 
     public DbSet<Account> Accounts { get; set; }
+
+    internal DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

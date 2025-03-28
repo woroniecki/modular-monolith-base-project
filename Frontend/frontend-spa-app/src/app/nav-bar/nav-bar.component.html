@@ -1,0 +1,16 @@
+<mat-toolbar
+  color="primary"
+  class="bg-blue-600 w-full flex justify-between px-4 py-2"
+>
+  <span class="text-xl font-bold">Frontend App</span>
+  <ng-container *ngIf="authService.username; else loginButton">
+    {{ authService.username }}
+    <button mat-button class="hidden md:block" (click)="onLogout()">
+      Logout
+    </button>
+  </ng-container>
+</mat-toolbar>
+
+<ng-template #loginButton>
+  <button mat-button class="hidden md:block" (click)="onLogin()">Login</button>
+</ng-template>
