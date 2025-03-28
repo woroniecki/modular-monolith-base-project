@@ -33,11 +33,14 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
         if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
             logger.LogInformation(refreshToken);
 
+        // Determine if the application is running locally
+        var isLocal = HttpContext.Request.Host.Host == "localhost";
+
         // Store the new refresh token in an HTTP-Only Secure Cookie
         Response.Cookies.Append(REFRESH_TOKEN_KEY, response.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
-            Secure = false,
+            Secure = !isLocal,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         });
@@ -52,14 +55,17 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
         if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
             return Unauthorized("Missing token");
 
-       var command = new RefreshLoginCommand(refreshToken);
+        var command = new RefreshLoginCommand(refreshToken);
         var response = await mediator.Send(command);
+
+        // Determine if the application is running locally
+        var isLocal = HttpContext.Request.Host.Host == "localhost";
 
         // Store the new refresh token in an HTTP-Only Secure Cookie
         Response.Cookies.Append(REFRESH_TOKEN_KEY, response.NewRefreshToken, new CookieOptions
         {
             HttpOnly = true,
-            Secure = false,
+            Secure = !isLocal,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         });
