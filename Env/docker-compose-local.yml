@@ -61,6 +61,17 @@
       postgresql-db:
         condition: service_healthy
 
+  nginx-angular-app:
+    build:
+      context: ../Frontend/frontend-spa-app
+      dockerfile: Frontend.Dockerfile
+      args:
+        CONFIG: development
+        APP_BASE_URL: http://localhost:5000
+    container_name: angular-container
+    ports:
+      - "4200:80"
+
 networks:
   app-network:
     driver: bridge
