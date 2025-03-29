@@ -29,9 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.UserManagement.Infr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6871B37E-86E3-4D9B-9FE0-C68CAE4A8B90}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose-local.yml = docker-compose-local.yml
-		docker-compose.yml = docker-compose.yml
-		database-init\init-db.sql = database-init\init-db.sql
 		instrcutions.txt = instrcutions.txt
 	EndProjectSection
 EndProject
@@ -54,6 +51,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgourndTasks", "BackgourndTasks", "{C5B04C18-0794-4ACD-81E9-3C3DEC2BC453}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "BackgroundTasks\BackgroundTasks.csproj", "{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{62DCF50D-9A56-45C5-B442-71E0A8EA88C0}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose-local.yml = docker-compose-local.yml
+		docker-compose.yml = docker-compose.yml
+		database-init\init-db.sql = database-init\init-db.sql
+		RunLocalDockerEnv.cmd = RunLocalDockerEnv.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,5 +148,6 @@ Global
 		{5B164743-63E5-40A3-B70A-AC529E703862} = {046578FA-EC53-406F-AD41-715ECE6DA8D3}
 		{A78DA2CC-3290-49DD-BA79-24DB3DDD199A} = {046578FA-EC53-406F-AD41-715ECE6DA8D3}
 		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5} = {C5B04C18-0794-4ACD-81E9-3C3DEC2BC453}
+		{62DCF50D-9A56-45C5-B442-71E0A8EA88C0} = {6871B37E-86E3-4D9B-9FE0-C68CAE4A8B90}
 	EndGlobalSection
 EndGlobal

@@ -27,6 +27,7 @@ public static class Extensions
         services.AddControllers();
         services.AddOpenApi();
         services.AddAuth(configuration);
+        services.AddHostedService<DbContextAppInitializer>();//migrations run only from api start
         host.UseSerilog((context, loggerConfiguration) =>
         {
             loggerConfiguration.WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} {Level:u3} [{CorrelationId}] {Message}{NewLine}{Exception}")

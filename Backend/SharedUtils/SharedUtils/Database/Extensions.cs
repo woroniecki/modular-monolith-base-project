@@ -11,7 +11,6 @@ public static class Extensions
     internal static IServiceCollection AddNpgsql(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<NpgsqlOptions>(configuration.GetSection(SectionName));
-        services.AddHostedService<DbContextAppInitializer>();
 
         return services;
     }

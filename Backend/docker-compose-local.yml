@@ -1,5 +1,5 @@
 services:
-  postgresql:
+  postgresql-db:
     image: postgres:latest
     container_name: postgres-container
     environment:
@@ -12,13 +12,19 @@ services:
       - ./database-init:/docker-entrypoint-initdb.d
     networks:
       - lingotrainer-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   bootstrapper:
     build:
-      dockerfile: Dockerfile
+      dockerfile: DockerfileBootstrapper
     environment:
-      ASPNETCORE_URLS: http://+:80
-      ASPNETCORE_ENVIRONMENT: Development
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
     ports:
       - "5000:80"
       - "5001:443"
@@ -31,7 +37,27 @@ services:
         max_attempts: 3
         window: 120s
     depends_on:
-      - postgresql
+      postgresql-db:
+        condition: service_healthy
+
+  background-tasks:
+    build:
+      dockerfile: DockerfileBackgroundTasks
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+    networks:
+      - lingotrainer-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    depends_on:
+      postgresql-db:
+        condition: service_healthy
 
 networks:
   lingotrainer-network:
