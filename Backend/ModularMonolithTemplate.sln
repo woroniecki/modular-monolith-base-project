@@ -51,6 +51,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Tests\Core.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Tests", "Tests\UserManagement.Tests\UserManagement.Tests.csproj", "{A78DA2CC-3290-49DD-BA79-24DB3DDD199A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgourndTasks", "BackgourndTasks", "{C5B04C18-0794-4ACD-81E9-3C3DEC2BC453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "BackgroundTasks\BackgroundTasks.csproj", "{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +117,10 @@ Global
 		{A78DA2CC-3290-49DD-BA79-24DB3DDD199A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A78DA2CC-3290-49DD-BA79-24DB3DDD199A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A78DA2CC-3290-49DD-BA79-24DB3DDD199A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,5 +142,6 @@ Global
 		{007A2EBC-3189-4958-B061-17EEBCAD9A4C} = {4D39C5F7-E586-48C6-9541-978F0E2E0AB9}
 		{5B164743-63E5-40A3-B70A-AC529E703862} = {046578FA-EC53-406F-AD41-715ECE6DA8D3}
 		{A78DA2CC-3290-49DD-BA79-24DB3DDD199A} = {046578FA-EC53-406F-AD41-715ECE6DA8D3}
+		{36C0BA14-5D08-4E43-B09F-A5034E1AE5C5} = {C5B04C18-0794-4ACD-81E9-3C3DEC2BC453}
 	EndGlobalSection
 EndGlobal

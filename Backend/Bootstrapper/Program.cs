@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.AddSharedFramework(builder.Configuration);
+builder.Services.AddSharedFrameworkApi(builder.Host, builder.Configuration);
 
 builder.Services.AddUserManagementModule();
 builder.Services.AddCoreModule();
@@ -27,7 +27,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseCors("CorsPolicy");
 
-app.UseSharedFramework();
+app.UseApiSharedFramework();
 
 app.UseHttpsRedirection();
 

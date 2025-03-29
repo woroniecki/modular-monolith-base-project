@@ -1,20 +1,14 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Modules.UserManagement.Infrastructure.DataAccessLayer.UoT;
 
 namespace Modules.UserManagement.App.Queries.HealthCheck;
 
-public class HealthCheckQueryHandler : IRequestHandler<HealthCheckQuery, string>
+public class HealthCheckQueryHandler(IUnitOfWork _uot) : IRequestHandler<HealthCheckQuery, string>
 {
-    private readonly IConfiguration _configuration;
-
-    public HealthCheckQueryHandler(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public async Task<string> Handle(HealthCheckQuery request, CancellationToken cancellationToken)
     {
-        var mySetting = _configuration["Npgsql:ConnectionString"];
-        return $"HealthCheckQueryTest - SettingValue: {mySetting}";
+        var acc = await _uot.DbContext.Accounts.Where(x => true).FirstOrDefaultAsync();
+        return $"Check database connection: {acc.Id}";
     }
 }

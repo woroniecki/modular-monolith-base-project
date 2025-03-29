@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-BackgroundTasks-e132602e-b3b1-4758-a506-5aaae04de234</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Dockerfile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Coravel" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\UserManagement\Modules.UserManagement.API\Modules.UserManagement.API.csproj" />
+    <ProjectReference Include="..\Modules\Core\Modules.Core.API\Modules.Core.API.csproj" />
+    <ProjectReference Include="..\SharedUtils\SharedUtils\SharedUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tasks\Core\" />
+  </ItemGroup>
+</Project>

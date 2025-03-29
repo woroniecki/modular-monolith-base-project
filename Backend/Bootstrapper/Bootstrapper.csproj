@@ -20,9 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Modules\UserManagement\Modules.UserManagement.API\Modules.UserManagement.API.csproj" />
     <ProjectReference Include="..\Modules\UserManagement\Modules.UserManagement.App\Modules.UserManagement.App.csproj" />
-    <ProjectReference Include="..\Modules\UserManagement\Modules.UserManagement.Infrastructure\Modules.UserManagement.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Core\Modules.Core.API\Modules.Core.API.csproj" />
     <ProjectReference Include="..\Modules\Core\Modules.Core.App\Modules.Core.App.csproj" />
+    <ProjectReference Include="..\Modules\UserManagement\Modules.UserManagement.Infrastructure\Modules.UserManagement.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Core\Modules.Core.Infrastructure\Modules.Core.Infrastructure.csproj" />
     <ProjectReference Include="..\SharedUtils\SharedUtils\SharedUtils.csproj" />
   </ItemGroup>

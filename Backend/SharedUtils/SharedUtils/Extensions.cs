@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using SharedUtils.Auth;
 using SharedUtils.Cqrs;
@@ -17,17 +18,16 @@ public static class Extensions
     private const string ApiTitle = "Project";
     private const string ApiVersion = "v1";
 
-    public static void AddSharedFramework(this WebApplicationBuilder builder, IConfiguration configuration)
+    /// <summary>
+    /// This method is used for api and suppose to have only services that are used in api
+    /// </summary>
+    public static void AddSharedFrameworkApi(this IServiceCollection services, IHostBuilder host, IConfiguration configuration)
     {
-        builder.Services.AddCqrs();
-        builder.Services.AddNpgsql(configuration);
-        builder.Services.AddControllers();
-        builder.Services.AddSingleton<IClock, UtcClock>();
-        builder.Services.AddOpenApi();
-        builder.Services.AddJwt();
-        builder.Services.AddAuth(configuration);
-        builder.Services.AddIntegrationEvents();
-        builder.Host.UseSerilog((context, loggerConfiguration) =>
+        services.AddSharedFramework(configuration);
+        services.AddControllers();
+        services.AddOpenApi();
+        services.AddAuth(configuration);
+        host.UseSerilog((context, loggerConfiguration) =>
         {
             loggerConfiguration.WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} {Level:u3} [{CorrelationId}] {Message}{NewLine}{Exception}")
             .Enrich.FromLogContext();
@@ -35,7 +35,21 @@ public static class Extensions
         });
     }
 
-    public static WebApplication UseSharedFramework(this WebApplication app)
+    public static void AddSharedFrameworkBgTasks(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddSharedFramework(configuration);
+    }
+
+    private static void AddSharedFramework(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddJwt();
+        services.AddNpgsql(configuration);
+        services.AddCqrs();
+        services.AddSingleton<IClock, UtcClock>();
+        services.AddIntegrationEvents();
+    }
+
+    public static WebApplication UseApiSharedFramework(this WebApplication app)
     {
         app.MapOpenApi();
         app.UseSwaggerUI(c =>
