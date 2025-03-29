@@ -1,0 +1,70 @@
+﻿services:
+  postgresql-db:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  bootstrapper:
+    build:
+      context: ../Backend/
+      dockerfile: Bootstrapper.Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+    ports:
+      - "5000:80"
+      - "5001:443"
+    networks:
+      - app-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    depends_on:
+      postgresql-db:
+        condition: service_healthy
+
+  background-tasks:
+    build:
+      context: ../Backend/
+      dockerfile: BackgroundTasks.Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+    networks:
+      - app-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    depends_on:
+      postgresql-db:
+        condition: service_healthy
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  postgres_data:

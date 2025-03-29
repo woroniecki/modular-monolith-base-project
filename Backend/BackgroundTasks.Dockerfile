@@ -11,22 +11,23 @@ WORKDIR /src
 COPY . .
 
 # Przywracanie zależności
-RUN dotnet restore "Bootstrapper/Bootstrapper.csproj"
+RUN pwd
+RUN dotnet restore "BackgroundTasks/BackgroundTasks.csproj"
 
 # Kopiowanie całego kodu źródłowego
 COPY . .
 
 # Budowanie projektu
-WORKDIR "/src/Bootstrapper"
-RUN dotnet build "Bootstrapper.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/BackgroundTasks"
+RUN dotnet build "BackgroundTasks.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Etap publikacji
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Bootstrapper.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BackgroundTasks.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Finalny obraz
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Bootstrapper.dll"]
+ENTRYPOINT ["dotnet", "BackgroundTasks.dll"]

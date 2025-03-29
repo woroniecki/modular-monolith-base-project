@@ -15,6 +15,7 @@ builder.Services.AddCoreModule();
 10. Add create database w init-db.sql
 11. Add UnitTests project
 12. Repkace ApiName, to segragate endpoints
+13. If needed you can add it to background tasks
 
 Adding new integration event:
 1. Create class in project Module.ModuleName.IntegrationEvent
@@ -31,4 +32,8 @@ To run locally docker enviroment use RunLocalDockerEnv.cmd
 
 If you need some communication between modules, to query data from other module, I reccomend to create new project and add client to it, as simulation of calling other module API by network, in other hand if there is requitment for some action I would reccomend to use integration events
 It suppose to make it much easier in case of moving to microservices
+
+Instruction to run 1st project
+
+Optional simple background tasks container, if not needed comment
 

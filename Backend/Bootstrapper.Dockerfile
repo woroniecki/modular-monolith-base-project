@@ -11,6 +11,7 @@ WORKDIR /src
 COPY . .
 
 # Przywracanie zależności
+RUN pwd
 RUN dotnet restore "Bootstrapper/Bootstrapper.csproj"
 
 # Kopiowanie całego kodu źródłowego
