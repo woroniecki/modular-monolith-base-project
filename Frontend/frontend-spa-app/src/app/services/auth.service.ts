@@ -29,7 +29,6 @@ export class AuthService {
   }
 
   tryToLoginWithRefreshToken(): void {
-    console.log('go');
     this.apiAccountService
       .apiUsermanagementAccountRefreshLoginPost$Json()
       .subscribe((token) => {

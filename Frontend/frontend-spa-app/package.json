@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend-spa-app": "node dist/frontend-spa-app/server/server.mjs",
-    "generate:client": "ng-openapi-gen --config src/assets/swagger/swagger-config.json",
+    "generate:client": "ng-openapi-gen --config swagger/swagger-config.json",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,css}\""
   },

@@ -71,8 +71,12 @@
       args:
         CONFIG: production
         APP_BASE_URL: http://localhost:5000
+        APP_NAME: Frontend App Docker - prod
     ports:
       - "4200:80"
+    environment:
+      APP_BASE_URL: http://localhost:5000
+      APP_NAME: Frontend App Docker - prod
 
 networks:
   app-network-prod:

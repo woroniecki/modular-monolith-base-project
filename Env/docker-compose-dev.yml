@@ -69,10 +69,12 @@
       context: ../Frontend/frontend-spa-app
       dockerfile: Frontend.Dockerfile
       args:
-        CONFIG: development
-        APP_BASE_URL: http://localhost:5002
+        CONFIG: production
     ports:
       - "4200:80"
+    environment:
+      APP_BASE_URL: http://localhost:5002
+      APP_NAME: Frontend App Docker - dev
 
 networks:
   app-network-dev:

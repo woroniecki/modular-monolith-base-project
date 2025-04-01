@@ -1,0 +1,4 @@
+{
+  "apiBaseUrl": "${APP_BASE_URL}",
+  "appName": "${APP_NAME}"
+}

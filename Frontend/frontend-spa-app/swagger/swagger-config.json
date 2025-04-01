@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "swagger/swagger.json",
+  "output": "src/app/api-client",
+  "serviceSuffix": "Service",
+  "module": "ApiModule",
+  "enumStyle": "alias",
+  "barrel": true,
+  "useHttpClientWithCredentials": true,
+  "withCredentials": true
+}

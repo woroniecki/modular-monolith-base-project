@@ -65,12 +65,12 @@
     build:
       context: ../Frontend/frontend-spa-app
       dockerfile: Frontend.Dockerfile
-      args:
-        CONFIG: development
-        APP_BASE_URL: http://localhost:5000
     container_name: angular-container
     ports:
       - "4200:80"
+    environment:
+      APP_BASE_URL: "http://localhost:5000"
+      APP_NAME: "Frontend App Docker - local"
 
 networks:
   app-network:

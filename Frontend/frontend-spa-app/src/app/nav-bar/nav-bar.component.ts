@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ConfigService } from '../services/config.servic';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,10 +15,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent {
+  title = 'Not Provided';
+
   constructor(
     public authService: AuthService,
+    private configService: ConfigService,
     private router: Router,
-  ) {}
+  ) {
+    this.title = configService.appName;
+  }
 
   onLogin() {
     this.router.navigate(['/login']);
