@@ -73,7 +73,7 @@
     ports:
       - "4202:80"
     environment:
-      APP_BASE_URL: ${APP_NAME}
+      APP_BASE_URL: ${APP_BASE_URL}
       APP_NAME: ${APP_NAME}
 
 networks:
