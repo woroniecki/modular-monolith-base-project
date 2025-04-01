@@ -1,23 +1,4 @@
 ﻿services:
-  # postgresql-db:
-  #   image: postgres:latest
-  #   container_name: dev-postgres-container
-  #   environment:
-  #     POSTGRES_USER: user
-  #     POSTGRES_PASSWORD: password
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #     - ./database-init:/docker-entrypoint-initdb.d
-  #   networks:
-  #     - app-network-dev
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-
   bootstrapper:
     container_name: dev-bootstrapper
     build:
@@ -42,6 +23,19 @@
     #   postgresql-db:
     #     condition: service_healthy
 
+  nginx-angular-app:
+    container_name: dev-nginx-angular-app
+    build:
+      context: ../Frontend/frontend-spa-app
+      dockerfile: Frontend.Dockerfile
+      args:
+        CONFIG: production
+    ports:
+      - "4202:80"
+    environment:
+      APP_BASE_URL: ${APP_BASE_URL}
+      APP_NAME: ${APP_NAME}
+
   # background-tasks:
   #   container_name: dev-background-tasks
   #   build:
@@ -63,18 +57,25 @@
   #     postgresql-db:
   #       condition: service_healthy
 
-  nginx-angular-app:
-    container_name: dev-nginx-angular-app
-    build:
-      context: ../Frontend/frontend-spa-app
-      dockerfile: Frontend.Dockerfile
-      args:
-        CONFIG: production
-    ports:
-      - "4202:80"
-    environment:
-      APP_BASE_URL: ${APP_BASE_URL}
-      APP_NAME: ${APP_NAME}
+  
+  # postgresql-db:
+  #   image: postgres:latest
+  #   container_name: dev-postgres-container
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./database-init:/docker-entrypoint-initdb.d
+  #   networks:
+  #     - app-network-dev
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
 networks:
   app-network-dev:
