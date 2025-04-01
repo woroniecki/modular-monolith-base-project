@@ -1,22 +1,22 @@
 ﻿services:
-  postgresql-db:
-    image: postgres:latest
-    container_name: dev-postgres-container
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./database-init:/docker-entrypoint-initdb.d
-    networks:
-      - app-network-dev
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # postgresql-db:
+  #   image: postgres:latest
+  #   container_name: dev-postgres-container
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./database-init:/docker-entrypoint-initdb.d
+  #   networks:
+  #     - app-network-dev
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   bootstrapper:
     container_name: dev-bootstrapper
@@ -26,7 +26,7 @@
     environment:
       - ASPNETCORE_URLS=http://+:80
       - ASPNETCORE_ENVIRONMENT=Development
-      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+      - Npqsql__ConnectionString=${Npqsql__ConnectionString}
     ports:
       - "5002:80"
       - "5003:443"
@@ -71,10 +71,10 @@
       args:
         CONFIG: production
     ports:
-      - "4200:80"
+      - "4202:80"
     environment:
-      APP_BASE_URL: http://localhost:5002
-      APP_NAME: Frontend App Docker - dev
+      APP_BASE_URL: ${APP_NAME}
+      APP_NAME: ${APP_NAME}
 
 networks:
   app-network-dev:
