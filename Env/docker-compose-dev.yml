@@ -38,9 +38,9 @@
         delay: 10s
         max_attempts: 3
         window: 120s
-    depends_on:
-      postgresql-db:
-        condition: service_healthy
+    # depends_on:
+    #   postgresql-db:
+    #     condition: service_healthy
 
   # background-tasks:
   #   container_name: dev-background-tasks
