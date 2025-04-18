@@ -10,14 +10,323 @@
     }
   ],
   "paths": {
-    "/api/core/HealthCheck/health-check": {
+    "/api/core/Habit/get-habit": {
       "get": {
         "tags": [
-          "HealthCheck"
+          "Habit"
+        ],
+        "parameters": [
+          {
+            "name": "habitId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         ],
         "responses": {
           "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/core/Habit/add-habit": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/Habit/edit-habit": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/Habit/remove-habit": {
+      "delete": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/Habit/set-habits-order": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/HabitData/add-habit-data": {
+      "post": {
+        "tags": [
+          "HabitData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/core/HabitData/clear-habit-data": {
+      "post": {
+        "tags": [
+          "HabitData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/core/HabitData/get-habits-data": {
+      "get": {
+        "tags": [
+          "HabitData"
+        ],
+        "parameters": [
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HabitDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HabitDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HabitDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -135,6 +444,153 @@
   },
   "components": {
     "schemas": {
+      "AddDailyHabitDataCommand": {
+        "required": [
+          "habitId",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "habitId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "AddHabitCommand": {
+        "required": [
+          "name",
+          "positive",
+          "description",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "DailyHabitsDataDto": {
+        "required": [
+          "date",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DeactivateHabitCommand": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "EditHabitCommand": {
+        "required": [
+          "id",
+          "name",
+          "positive",
+          "description",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "HabitDto": {
+        "required": [
+          "id",
+          "positive",
+          "name",
+          "active",
+          "description",
+          "icon",
+          "lastCheckedDate",
+          "streak",
+          "dailyDatas"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "lastCheckedDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "streak": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dailyDatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyHabitsDataDto"
+            }
+          }
+        }
+      },
       "LoginCommand": {
         "required": [
           "username",
@@ -168,12 +624,47 @@
             "type": "string"
           }
         }
+      },
+      "RemoveDailyHabitDataCommand": {
+        "required": [
+          "habitId",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "habitId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "SetOrderHabitsCommand": {
+        "required": [
+          "habitsOrder"
+        ],
+        "type": "object",
+        "properties": {
+          "habitsOrder": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
       }
     }
   },
   "tags": [
     {
-      "name": "HealthCheck"
+      "name": "Habit"
+    },
+    {
+      "name": "HabitData"
     },
     {
       "name": "Account"

@@ -30,9 +30,6 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
     {
         var response = await mediator.Send(cmd);
 
-        if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
-            logger.LogInformation(refreshToken);
-
         // Determine if the application is running locally
         var isLocal = HttpContext.Request.Host.Host == "localhost";
 

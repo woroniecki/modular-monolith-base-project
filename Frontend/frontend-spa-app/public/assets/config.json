@@ -1,4 +1,4 @@
 {
-  "apiBaseUrl": "http://localhost:5000",
+  "apiBaseUrl": "http://localhost:5244",
   "appName": "Fe app"
 }

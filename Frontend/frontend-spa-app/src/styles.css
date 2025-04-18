@@ -1,5 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@plugin "daisyui" {
+    themes: nord --default, abyss --dracula;
+  }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  /* --color-primary: #33CA7F;
+  --color-primary-light: #7DCFB6;
+  --color-neutral: #A7A5C6;
+  --color-negative: #AB3428;
+  --color-negative-light: #FFE3E3; */
+
+  /* --color-primary: var(--color-green-500);
+  --color-primary-light: var(--color-lime-200);
+  --color-neutral: var(--color-gray-100);
+  --color-negative: var(--color-red-400);
+  --color-negative-light: var(--color-red-100); */
+
+  --color-primary: #5FD074;
+  --color-primary-light: #a8c9ae;
+  --color-primary-transparent: #5fd0747a;
+  --color-neutral: #FCFBF9;
+  --color-negative: #FD6B44;
+  --color-negative-light: #ff9578;
+  --color-negative-transparent: #fd6c446f;
+  --color-neutral-transparent: #fcfbf986;
+}

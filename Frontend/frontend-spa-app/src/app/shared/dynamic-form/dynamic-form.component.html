@@ -1,19 +1,28 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-    <ng-container *ngFor="let field of formConfig">
-      <mat-form-field appearance="fill" class="w-full mb-4">
-        <mat-label>{{ field.label }}</mat-label>
-        <input
-          matInput
-          [type]="field.type"
-          [formControlName]="field.name"
-          [required]="field.required"
-        />
-        <mat-error *ngIf="form.get(field.name)?.hasError('required')">
-          {{ field.label }} is required
-        </mat-error>
-      </mat-form-field>
-    </ng-container>
-    <button mat-raised-button color="primary" type="submit" class="w-full">
-      {{ submitButtonLabel }}
-    </button>
-  </form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto mt-3 p-6 rounded-lg shadow-md">
+  <ng-container *ngFor="let field of formConfig">
+    <label class="text-sm font-medium ">{{ field.label }}</label>
+    <!-- Text -->
+    <input *ngIf="field.type === 'text' || field.type === 'password' || field.type === 'email'" class="mb-3 px-2 py-1.5
+          mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+          focus:outline-none
+          focus:border-sky-500
+          focus:ring-1
+          focus:ring-sky-500
+          focus:invalid:border-red-500 focus:invalid:ring-red-500" [type]="field.type" [formControlName]="field.name"
+      [required]="field.required" placeholder="{{ field.label }}">
+    <!-- Checkbox -->
+    <input *ngIf="field.type === 'checkbox'" type="checkbox"
+      class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5" [formControlName]="field.name" />
+    <app-icon-picker *ngIf="field.type === 'icon-picker'" [icons]="allIcons"
+      [selectedIcon]="form.get(field.name)?.value"
+      (iconChange)="form.get(field.name)?.setValue($event)"></app-icon-picker>
+  </ng-container>
+  <button
+    class="w-full px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-emerald-600 to-lime-600 font-medium text-gray-100 block transition duration-300"
+    type="submit">
+    <span id="login_process_state" class="hidden">Sending :)</span>
+    <span id="login_default_state">{{ submitButtonLabel }}<span id="subtotal"></span></span>
+  </button>
+
+  <ng-content></ng-content>
+</form>

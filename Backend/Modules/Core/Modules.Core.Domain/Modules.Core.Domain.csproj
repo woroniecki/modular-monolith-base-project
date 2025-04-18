@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\..\SharedUtils\SharedUtils.Domain\SharedUtils.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-using BackgroundTasks.Tasks.UserManagement;
+using BackgroundTasks.Tasks.Core;
 using Coravel;
 using Modules.Core.API;
 using Modules.UserManagement.API;

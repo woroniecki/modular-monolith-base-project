@@ -6,7 +6,8 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { HealthCheckService } from './services/health-check.service';
+import { HabitService } from './services/habit.service';
+import { HabitDataService } from './services/habit-data.service';
 import { AccountService } from './services/account.service';
 
 /**
@@ -17,7 +18,8 @@ import { AccountService } from './services/account.service';
   exports: [],
   declarations: [],
   providers: [
-    HealthCheckService,
+    HabitService,
+    HabitDataService,
     AccountService,
     ApiConfiguration
   ],

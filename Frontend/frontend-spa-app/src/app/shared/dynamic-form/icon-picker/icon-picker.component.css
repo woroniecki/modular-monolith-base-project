@@ -1,0 +1,9 @@
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  gap: 0.1rem;
+}
+.icon-item.selected {
+  border: 2px solid #10b981;
+  background-color: #ecfdf5;
+}

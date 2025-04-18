@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.component';
 import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AccountService } from '../api-client/services';
-import { Router } from '@angular/router';
+import { DialogResult } from '../shared/dialog-result.enum';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +20,9 @@ export class RegisterComponent {
   ];
 
   constructor(
-    private apiAccountService: AccountService,
+    public dialogRef: MatDialogRef<RegisterComponent>,
     private dialog: MatDialog,
-    private router: Router,
+    private apiAccountService: AccountService
   ) {}
 
   onSubmit(formData: { username: string; email: string; password: string }) {
@@ -35,7 +36,10 @@ export class RegisterComponent {
       })
       .subscribe({
         next: () => {
-          this.router.navigate(['/login']);
+          this.dialogRef.close(DialogResult.SUCCESS);
+          this.dialog.open(LoginComponent, {
+                width: '350px'
+              });
         },
         error: (err) => {
           console.log(err);

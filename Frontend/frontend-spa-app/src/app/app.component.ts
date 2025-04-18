@@ -1,21 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AuthService } from './services/auth.service';
+import { CommonModule } from '@angular/common';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, NavBarComponent],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'frontend-spa-app';
 
-  constructor(private authService: AuthService) {}
+  constructor(private dialog: MatDialog, public authService: AuthService) {}
 
-  ngOnInit() {
-    this.authService.tryToLoginWithRefreshToken();
+  onRegister() {
+    this.dialog.open(RegisterComponent, {
+      width: '350px'
+    });
+  }
+
+  onLogin() {
+    this.dialog.open(LoginComponent, {
+      width: '350px'
+    });
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

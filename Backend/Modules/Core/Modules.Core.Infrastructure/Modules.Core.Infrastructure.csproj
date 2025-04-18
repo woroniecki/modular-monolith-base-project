@@ -21,4 +21,9 @@
     <ProjectReference Include="..\Modules.Core.Domain\Modules.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccessLayer\Repositories\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

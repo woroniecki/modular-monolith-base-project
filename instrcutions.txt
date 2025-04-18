@@ -37,3 +37,5 @@ Instruction to run 1st project
 
 Optional simple background tasks container, if not needed comment
 
+Caddyfile
+

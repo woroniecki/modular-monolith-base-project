@@ -1,37 +1,35 @@
-﻿services:
+﻿version: '3.9'
+
+services:
   postgresql-db:
     image: postgres:latest
-    container_name: prod-postgres-container
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database-init:/docker-entrypoint-initdb.d
     networks:
-      - app-network-prod
+      - backend-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 3
+      start_period: 5s
 
   bootstrapper:
-    container_name: prod-bootstrapper
     build:
       context: ../Backend/
       dockerfile: Bootstrapper.Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - ASPNETCORE_ENVIRONMENT=Production
-      - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
-    ports:
-      - "5000:80"
-      - "5001:443"
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - Npqsql__ConnectionString=${Npqsql__ConnectionString}
+      - Cors__Origin=${Cors__Origin}
     networks:
-      - app-network-prod
+      - backend-network
+      - proxy-network
     deploy:
       restart_policy:
         condition: on-failure
@@ -42,46 +40,31 @@
       postgresql-db:
         condition: service_healthy
 
-  # background-tasks:
-  #   container_name: prod-background-tasks
-  #   build:
-  #     context: ../Backend/
-  #     dockerfile: BackgroundTasks.Dockerfile
-  #   environment:
-  #     - ASPNETCORE_URLS=http://+:80
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
-  #   networks:
-  #     - app-network-prod
-  #   deploy:
-  #     restart_policy:
-  #       condition: on-failure
-  #       delay: 10s
-  #       max_attempts: 3
-  #       window: 120s
-  #   depends_on:
-  #     postgresql-db:
-  #       condition: service_healthy
-
-  nginx-angular-app:
-    container_name: prod-nginx-angular-app
+  caddy-angular-app:
     build:
       context: ../Frontend/frontend-spa-app
       dockerfile: Frontend.Dockerfile
       args:
         CONFIG: production
-        APP_BASE_URL: http://localhost:5000
-        APP_NAME: Frontend App Docker - prod
-    ports:
-      - "4200:80"
     environment:
-      APP_BASE_URL: http://localhost:5000
-      APP_NAME: Frontend App Docker - prod
+      APP_BASE_URL: ${APP_BASE_URL}
+      APP_NAME: ${APP_NAME}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - proxy-network
 
 networks:
-  app-network-prod:
+  proxy-network:
+    driver: bridge
+  backend-network:
     driver: bridge
 
 volumes:
-  mysql_data:
   postgres_data:
+  caddy_data:
+  caddy_config:

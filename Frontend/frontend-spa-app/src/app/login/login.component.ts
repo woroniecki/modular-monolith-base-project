@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { DynamicFormComponent } from '../shared/dynamic-form/dynamic-form.component';
 import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { DialogResult } from '../shared/dialog-result.enum';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   ];
 
   constructor(
+    public dialogRef: MatDialogRef<LoginComponent>,
     private dialog: MatDialog,
     private router: Router,
     private auth: AuthService,
@@ -26,7 +28,7 @@ export class LoginComponent {
   onSubmit(formData: { username: string; password: string }) {
     this.auth.loginWithCredentials(formData).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        this.dialogRef.close(DialogResult.SUCCESS);
       },
       error: (err) => {
         this.dialog.open(ErrorModalComponent, {

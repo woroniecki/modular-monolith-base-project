@@ -34,6 +34,7 @@ public static class Extensions
             .Enrich.FromLogContext();
             loggerConfiguration.ReadFrom.Configuration(context.Configuration);
         });
+        services.AddHttpContextAccessor();
     }
 
     public static void AddSharedFrameworkBgTasks(this IServiceCollection services, IConfiguration configuration)

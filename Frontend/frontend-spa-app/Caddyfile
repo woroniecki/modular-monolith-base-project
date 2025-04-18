@@ -1,0 +1,15 @@
+localhost {
+  route /api/* {
+    reverse_proxy bootstrapper:80
+  }
+  route * {
+    root * /usr/share/caddy
+    file_server
+    try_files {path} /index.html
+
+    @configFile path /assets/config.json
+    header @configFile {
+      Content-Type application/json
+    }
+  }
+}

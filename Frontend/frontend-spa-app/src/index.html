@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>FrontendSpaApp</title>
+  <title>Good Bites</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="icon_256.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body class="mat-typography">
+<body>
   <app-root></app-root>
+  
 </body>
+<style>
+  .bg-repeat-leaves {
+    background-image: url('leaves-pattern.png');
+    background-repeat: repeat;
+    background-color: #f7fee7; /* fallback in case image fails */
+}
+</style>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
 </html>

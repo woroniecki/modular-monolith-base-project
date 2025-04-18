@@ -1,14 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { IconPickerComponent } from './icon-picker/icon-picker.component';
+import { Icons } from '../icons.enum';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -16,19 +15,20 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
     CommonModule,
+    IconPickerComponent
   ],
 })
-export class DynamicFormComponent {
+export class DynamicFormComponent implements OnChanges {
+  allIcons = Object.values(Icons);
   @Input() formConfig: {
     label: string;
     name: string;
     type: string;
     required: boolean;
+    defaultValue?: any; // Add defaultValue property
   }[] = [];
+  @Input() initialData: Record<string, any> = {};
   @Input() submitButtonLabel: string = 'Submit';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() formSubmit = new EventEmitter<any>();
@@ -41,13 +41,19 @@ export class DynamicFormComponent {
     const formControls = this.formConfig.reduce(
       (controls: { [key: string]: unknown }, field) => {
         controls[field.name] = field.required
-          ? [null, Validators.required]
-          : [null];
+          ? [field.defaultValue || null, Validators.required]
+          : [field.defaultValue || null]; // Use defaultValue if provided
         return controls;
       },
       {},
     );
     this.form = this.fb.group(formControls);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['initialData'] && this.form) {
+      this.form.patchValue(this.initialData);
+    }
   }
 
   onSubmit() {

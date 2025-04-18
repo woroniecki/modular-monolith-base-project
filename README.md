@@ -1,1 +1,1 @@
-# lingotrainer
+# Good Bites App

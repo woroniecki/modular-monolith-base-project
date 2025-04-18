@@ -1,0 +1,23 @@
+<div class="icon-grid max-h-32 overflow-y-auto border rounded">
+  <div
+    *ngFor="let icon of icons"
+    (click)="selectIcon(icon)"
+    class="icon-item flex flex-col items-center justify-center cursor-pointer rounded hover:bg-gray-100 border"
+    [class.selected]="icon === selectedIcon"
+  >
+  <ng-container *ngIf="icon.endsWith('.svg')">
+    <svg-icon 
+      [src]="'/icons/' + icon" 
+      [svgStyle]="{ width: '32px', height: '32px' }">
+    </svg-icon>
+  </ng-container>
+  
+  <ng-container *ngIf="icon.endsWith('.png')">
+    <img 
+      [src]="'/icons/' + icon" 
+      width="32" 
+      height="32" 
+      alt="icon">
+  </ng-container>
+  </div>
+</div>

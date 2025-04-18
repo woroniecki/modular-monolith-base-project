@@ -1,4 +1,15 @@
-<div class="flex flex-col items-center justify-start h-screen bg-gray-100 p-4">
-  <app-nav-bar class="w-full"></app-nav-bar>
-  <router-outlet></router-outlet>
+<div class="min-h-screen flex flex-col bg-repeat-leaves">
+  <ng-container *ngIf="authService.username; else landingPage">
+    <div class="flex-grow flex flex-col items-center justify-start">
+      Logged in as {{ authService.username }}
+      <button class="btn" (click)="onLogout()">Logout</button>
+    </div>
+  </ng-container>
+  <ng-template #landingPage>
+    <div class="flex-grow flex flex-col items-center justify-start">
+      Hello World.
+      <button class="btn" (click)="onLogin()">Login</button>
+      <button class="btn" (click)="onRegister()">Register</button>
+    </div>
+  </ng-template>
 </div>

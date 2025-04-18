@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="EventHandlers\Integration\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
 
 </Project>

@@ -15,10 +15,21 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.WithOrigins(builder.Configuration.GetSection("Cors")["Origin"])
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+        var origin = builder.Configuration.GetSection("Cors")["Origin"];
+
+        if (origin == "*")
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        }
+        else
+        {
+            policy.WithOrigins(origin)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        }
     });
 });
 
