@@ -13,8 +13,8 @@ This is base project with basic configuration to start work on developing withou
 #### Tech Stack
 
 - **Frontend:** Angular
-- **Backend:** ASP.NET Core
-- **Database:** SQL Server / PostgreSQL / MongoDB (choose accordingly)
+- **Backend:** .NET 9, ASP.NET Core
+- **Database:** PostgreSQL
 - **Containerization:** Docker & Docker Compose
 - **CI/CD:** [GitHub Actions / GitLab CI / other]
 - **Hosting:** VPS with Nginx proxy & SSL
