@@ -2,21 +2,13 @@
 
 This is base project with basic configuration to start work on developing without any extra configuration with DDD approach and easily portable to microservices.
 
-#### Features
-- Angular frontend
-- ASP.NET Core backend API
-- Database integration
-- Docker Compose setup for dev and prod
-- SSL support in production
-- CI/CD ready architecture
-
 #### Tech Stack
 
 - **Frontend:** Angular 19
-- **Backend:** .NET 9, ASP.NET Core
+- **Backend:** .NET 9
 - **Database:** PostgreSQL
-- **Containerization:** Docker & Docker Compose
-- **Hosting:** Caddy reverse proxy
+- **Containerization:** Docker
+- **Hosting:** Caddy
 
 ## Getting Started
 
@@ -33,7 +25,8 @@ Keep in mind, that in production docker compose background task project is cutte
 if it's needed in project you should add it manually, base on docker-compose-local.yml
 
 Prepare CaddyFile ./Frontend/frontend-spa-app/Caddyfile:
-replace localhost with proper url for reverse proxy
+replace localhost with proper url for reverse proxy.  
+Caddy is resposnsible for ssl.
 
 Needed enviroment variables:
 - POSTGRES_USER
