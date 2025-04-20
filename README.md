@@ -12,12 +12,11 @@ This is base project with basic configuration to start work on developing withou
 
 #### Tech Stack
 
-- **Frontend:** Angular
+- **Frontend:** Angular 19
 - **Backend:** .NET 9, ASP.NET Core
 - **Database:** PostgreSQL
 - **Containerization:** Docker & Docker Compose
-- **CI/CD:** [GitHub Actions / GitLab CI / other]
-- **Hosting:** VPS with Nginx proxy & SSL
+- **Hosting:** Caddy reverse proxy
 
 ## Getting Started
 
@@ -32,13 +31,31 @@ docker compose -f docker-compose-local.yml up -d
 Use ./Env/docker-compose-prod.yml to run your project on production
 Keep in mind, that in production docker compose background task project is cutted off,
 if it's needed in project you should add it manually, base on docker-compose-local.yml
+
+Prepare CaddyFile ./Frontend/frontend-spa-app/Caddyfile:
+replace localhost with proper url for reverse proxy
+
 Needed enviroment variables:
 - POSTGRES_USER
-- POSTGRES_PASSWORD
-- Npqsql__ConnectionString
+- POSTGRES_PASSWORD 
+- Npqsql__ConnectionString (Database connection string)
 - Cors__Origin
-- APP_BASE_URL: 
+- APP_BASE_URL (Base url for frontend to call)
 - ASPNETCORE_ENVIRONMENT: Production
+- JwtSettings__SecretKey (keep it safe)
+- JwtSettings__ExpirationInMinutes (how long token is valid)
+
+## Project description
+
+#### Structur
+
+Here is a short summary of the project.
+
+<details><summary>Does work</summary>
+
+[hi](https://hello.ca)
+
+</details>
 
 ## Contributing
 
