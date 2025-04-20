@@ -51,28 +51,21 @@ Needed enviroment variables:
 
 Here is a short summary of the project.
 
-<details><summary>Backend</summary>
-<details><summary>BackgroundTasks</summary></details>
-<details><summary>Bootstrapper</summary></details>
-<details><summary>Modules</summary>
+Backend  
+&emsp;BackgroundTasks - coravel console app to run background tasks    
+&emsp;Bootstrapper - api project entry point
+&emsp;Modules - separated modules by domains  
+&emsp;&emsp;Core - main project module to start with
+&emsp;&emsp;UserManagement - resposnsible for user, account, user account actions  
+&emsp;SharedUtils  
+&emsp;&emsp;SharedUtils  
+&emsp;&emsp;SharedUtils.Domain  
+&emsp;Tests  
+&emsp;&emsp;Core.Tests  
+&emsp;&emsp;UserManagement.Tests  
 
-</details>
-
-<details><summary>SharedUtils</summary>
-<details><summary>SharedUtils</summary></details>
-<details><summary>SharedUtils.Domain</summary></details>
-</details>
-
-<details><summary>Tests</summary>
-<details><summary>Core.Tests</summary></details>
-<details><summary>UserManagement.Tests</summary></details>
-</details>
-
-</details>
-
-<details><summary>Frontend</summary>
-todo
-</details>
+Frontend  
+&emsp;todo
 
 ## Contributing
 
