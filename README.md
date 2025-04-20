@@ -51,10 +51,27 @@ Needed enviroment variables:
 
 Here is a short summary of the project.
 
-<details><summary>Does work</summary>
+<details><summary>Backend</summary>
+<details><summary>BackgroundTasks</summary></details>
+<details><summary>Bootstrapper</summary></details>
+<details><summary>Modules</summary>
 
-[hi](https://hello.ca)
+</details>
 
+<details><summary>SharedUtils</summary>
+<details><summary>SharedUtils</summary></details>
+<details><summary>SharedUtils.Domain</summary></details>
+</details>
+
+<details><summary>Tests</summary>
+<details><summary>Core.Tests</summary></details>
+<details><summary>UserManagement.Tests</summary></details>
+</details>
+
+</details>
+
+<details><summary>Frontend</summary>
+todo
 </details>
 
 ## Contributing
