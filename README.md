@@ -1,6 +1,6 @@
 # Modular monolith base project
 
-This is base project with basic configuration to start work on developing without any extra configuration.
+This is base project with basic configuration to start work on developing without any extra configuration with DDD approach and easily portable to microservices.
 
 #### Features
 - Angular frontend
